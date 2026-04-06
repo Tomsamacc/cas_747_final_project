@@ -15,6 +15,32 @@ Reimplementation of **LSGNN** for experiments.
 - `notebooks/` — `model_training.ipynb`, `data_analysis.ipynb`
 - `tests/` — small smoke scripts (`test_model.py`, `test_preprocessing.py`)
 
+### One-shot root scripts (preprocess, then train + final metrics)
+
+Create and activate your own conda/venv and install PyTorch + PyG + deps per [Setup](#setup). Then:
+
+**Highly recommand that create the environment and install all dependencies, then run these scripts**
+
+1. **Preprocess all datasets** (optional `pip install -r requirements.txt` if you pass `--install`):
+
+   ```bash
+   ./setup_and_preprocess.sh --install
+   ```
+
+   Dependencies already installed:
+
+   ```bash
+   ./setup_and_preprocess.sh
+   ```
+
+2. **Train everything and write a summary file** (long run). Split counts per dataset are listed in `run_train_and_results.sh` and must match your `data/processed/*.pt`:
+
+   ```bash
+   ./run_train_and_results.sh
+   ```
+
+   Aggregated console output is also saved to `results/FINAL_RESULTS.txt`.
+
 ## Setup
 
 Use **Python 3.11** (3.10+ is usually fine).
@@ -103,11 +129,14 @@ Point **Jupyter / VS Code / Cursor** at `lsgnn-venv/bin/python` (or `lsgnn-venv\
 cd /path/to/Guanhua_Zhao
 ```
 
+
 ### Preprocess
 
 ```bash
 python -m src.data_processing.preprocess --dataset cora
 ```
+The preprocess might get stuck at the end of preprocess, please terminate it manully after it saves the preprocessed data
+
 
 ### Train
 
